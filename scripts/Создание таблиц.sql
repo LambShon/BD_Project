@@ -5,7 +5,7 @@ CREATE TABLE Farmers (
     phone_number VARCHAR(20) NOT NULL UNIQUE,
     email VARCHAR(100),
     farm_address TEXT NOT NULL
-);
+); 
 
 -- Создание таблицы Склады
 CREATE TABLE Warehouses (
