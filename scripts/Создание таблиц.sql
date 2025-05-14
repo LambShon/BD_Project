@@ -1,5 +1,5 @@
--- Создание таблицы Фермеры
-CREATE TABLE Farmers (
+-- Создание таблицы Фермеры (если не существует)
+CREATE TABLE IF NOT EXISTS Farmers (
     farmer_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20) NOT NULL UNIQUE,
@@ -7,16 +7,16 @@ CREATE TABLE Farmers (
     farm_address TEXT NOT NULL
 ); 
 
--- Создание таблицы Склады
-CREATE TABLE Warehouses (
+-- Создание таблицы Склады (если не существует)
+CREATE TABLE IF NOT EXISTS Warehouses (
     warehouse_id SERIAL PRIMARY KEY,
     address TEXT NOT NULL,
     storage_type VARCHAR(50) NOT NULL CHECK (storage_type IN ('Холодильник', 'Сухое', 'Морозильник')),
     capacity INT NOT NULL CHECK (capacity > 0)
 );
 
--- Создание таблицы Продукция
-CREATE TABLE Products (
+-- Создание таблицы Продукция (если не существует)
+CREATE TABLE IF NOT EXISTS Products (
     product_id SERIAL PRIMARY KEY,
     farmer_id INT NOT NULL REFERENCES Farmers(farmer_id),
     warehouse_id INT NOT NULL REFERENCES Warehouses(warehouse_id),
@@ -27,16 +27,16 @@ CREATE TABLE Products (
     shelf_life DATE
 );
 
--- Создание таблицы Покупатели
-CREATE TABLE Customers (
+-- Создание таблицы Покупатели (если не существует)
+CREATE TABLE IF NOT EXISTS Customers (
     customer_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20) NOT NULL UNIQUE,
     address TEXT NOT NULL
 );
 
--- Создание таблицы Заказы
-CREATE TABLE Orders (
+-- Создание таблицы Заказы (если не существует)
+CREATE TABLE IF NOT EXISTS Orders (
     order_id SERIAL PRIMARY KEY,
     customer_id INT NOT NULL REFERENCES Customers(customer_id),
     order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -44,8 +44,8 @@ CREATE TABLE Orders (
     total_amount DECIMAL(10, 2) NOT NULL CHECK (total_amount >= 0)
 );
 
--- Создание таблицы Состав заказа
-CREATE TABLE OrderItems (
+-- Создание таблицы Состав заказа (если не существует)
+CREATE TABLE IF NOT EXISTS OrderItems (
     order_item_id SERIAL PRIMARY KEY,
     order_id INT NOT NULL REFERENCES Orders(order_id),
     product_id INT NOT NULL REFERENCES Products(product_id),
