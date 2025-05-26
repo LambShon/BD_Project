@@ -37,7 +37,7 @@ WHERE p.product_id IS NULL;
 SELECT 
     f.name,
     COUNT(p.product_id) AS products_count,
-    RANK() OVER (ORDER BY COUNT(p.product_id) DESC AS farmer_rank
+    RANK() OVER (ORDER BY COUNT(p.product_id) DESC) AS farmer_rank
 FROM Farmers f
 LEFT JOIN Products p ON f.farmer_id = p.farmer_id
 GROUP BY f.farmer_id, f.name
