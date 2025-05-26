@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Products (
     farmer_id INT NOT NULL REFERENCES Farmers(farmer_id),
     warehouse_id INT NOT NULL REFERENCES Warehouses(warehouse_id),
     name VARCHAR(100) NOT NULL,
-    category VARCHAR(50) NOT NULL CHECK (category IN ('Молочное', 'Овощи', 'Фрукты', 'Мясо', 'Зерно')),
+    category VARCHAR(50) NOT NULL CHECK (category IN ('Молочное', 'Овощи', 'Фрукты', 'Мясо', 'Зерно', 'Другое')),
     current_price DECIMAL(10, 2) NOT NULL CHECK (current_price > 0),
     quantity_in_stock INT NOT NULL CHECK (quantity_in_stock >= 0),
     shelf_life DATE
